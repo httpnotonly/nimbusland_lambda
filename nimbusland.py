@@ -1,19 +1,11 @@
-#!/usr/bin/python
-
-# --- # --- # --- # --- # --- # --- # --- # --- # --- # --- # --- # --- # --- #
-
 import requests
 from netaddr import IPNetwork, IPAddress
 import json
 from xml.dom import minidom
 
-# --- # --- # --- # --- # --- # --- # --- # --- # --- # --- # --- # --- # --- #
-
 __author__ = '@TweekFawkes'
 __website__ = 'Stage2Sec.com'
 __blog__ = 'https://Stage2Sec.com/blog/'
-
-# --- # --- # --- # --- # --- # --- # --- # --- # --- # --- # --- # --- # --- #
 
 '''
 
@@ -22,6 +14,7 @@ __blog__ = 'https://Stage2Sec.com/blog/'
 Checks if an IP address is known to be assoicated with AWS or Azure
 
 '''
+
 
 class Nimbusland:
 
@@ -55,5 +48,4 @@ class Nimbusland:
                 cidr = str(r.attributes['Subnet'].value)
                 if IPAddress(target_ip) in IPNetwork(cidr):
                     return [target_ip, cidr, str(region_name), 'Azure', "Microsoft"]
-
         return False

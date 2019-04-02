@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from nimbusland import Nimbusland
 
 app = Flask(__name__)
@@ -16,7 +16,10 @@ def nimbusland():
             nl = Nimbusland()
             ip_info = nl.get_aws_ip_info(target_ip)
             ip_info = ip_info if ip_info else nl.get_azure_ip_info(target_ip)
-
+            if request.form['json']:
+                return jsonify({'result': ip_info})
+            if request.form['plain']:
+                return ip_info
         except Exception as e:
             error = True
             error_message = str(e)
